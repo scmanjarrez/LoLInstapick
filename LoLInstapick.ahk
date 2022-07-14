@@ -16,37 +16,7 @@
 
 CoordMode, Mouse, Screen
 
-F3::
-{
-	MsgBox, This must be run on champ select in a custom game.`n`nFirst, click on the CHAT BOX
-	KeyWait, LButton, D
-	MouseGetPos, chat_x, chat_y
-	ini_SetValue("Positions", "Chat_X", chat_x)
-	ini_SetValue("Positions", "Chat_Y", chat_y)
-	
-	MsgBox, Now click on the SEARCH BOX
-	KeyWait, LButton, D
-	MouseGetPos, search_x, search_y
-	ini_SetValue("Positions", "Search_X", search_x)
-	ini_SetValue("Positions", "Search_Y", search_y)
-	
-	MsgBox, Now click on the first champ icon ('?' button)
-	KeyWait, LButton, D
-	MouseGetPos, champ_x, champ_y
-	ini_SetValue("Positions", "Champ_X", champ_x)
-	ini_SetValue("Positions", "Champ_Y", champ_y)
-	
-	MsgBox, Finally, click on the LOCK BOX
-	KeyWait, LButton, D
-	MouseGetPos, lock_x, lock_y
-	ini_SetValue("Positions", "Lock_X", lock_x)
-	ini_SetValue("Positions", "Lock_Y", lock_y)
-	
-	MsgBox, Calibration completed. Run the script (F1) when champ select pops up.
-	return
-}
-
-; Triggers on F2 keypress
+; Triggers on F2 keypress, instapick
 F1::
 {
 	; Check if the triggered window match the title "League of Legends"
@@ -54,10 +24,6 @@ F1::
 	if(Title != "League of Legends")
 		return
 
-	WinGetPos, x1, y1, w, h, A ; Store window position and size
-	x2 := x1 + w
-	y2 := y1 + h
-	
 	; Retrieve Pick and Lane from .ini
 	champ := ini_GetValue("Champ","Pick") 
 	lane := ini_GetValue("Champ","Lane")
@@ -94,8 +60,43 @@ F1::
 	return
 }
 
+; Triggers on F2, reload the script
 F2::
-Reload
+{
+	Reload
+	return
+}
+
+; Triggers on F3, start calibration
+F3::
+{
+	MsgBox, This must be run on champ select in a custom game.`n`nFirst, click on the CHAT BOX
+	KeyWait, LButton, D
+	MouseGetPos, chat_x, chat_y
+	ini_SetValue("Positions", "Chat_X", chat_x)
+	ini_SetValue("Positions", "Chat_Y", chat_y)
+	
+	MsgBox, Now click on the SEARCH BOX
+	KeyWait, LButton, D
+	MouseGetPos, search_x, search_y
+	ini_SetValue("Positions", "Search_X", search_x)
+	ini_SetValue("Positions", "Search_Y", search_y)
+	
+	MsgBox, Now click on the first champ icon ('?' button)
+	KeyWait, LButton, D
+	MouseGetPos, champ_x, champ_y
+	ini_SetValue("Positions", "Champ_X", champ_x)
+	ini_SetValue("Positions", "Champ_Y", champ_y)
+	
+	MsgBox, Finally, click on the LOCK BOX
+	KeyWait, LButton, D
+	MouseGetPos, lock_x, lock_y
+	ini_SetValue("Positions", "Lock_X", lock_x)
+	ini_SetValue("Positions", "Lock_Y", lock_y)
+	
+	MsgBox, Calibration completed. Run the script (F1) when champ select pops up.
+	return
+}
 
 ini_GetValue(_Section, _Key)
 {
