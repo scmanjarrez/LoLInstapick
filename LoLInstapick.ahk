@@ -38,15 +38,6 @@ F1::
 	lock_x := ini_GetValue("Positions","Lock_X")
 	lock_y := ini_GetValue("Positions","Lock_Y")
 	
-	; Wait chat to connect
-	Sleep, delay
-	
-	; Declare position
-	MouseClick, left, chat_x, chat_y
-	SendInput, %lane%
-	MouseClick, left, chat_x, chat_y
-	SendInput, {ENTER}
-	
 	; Search champ
 	MouseClick, left, search_x, search_y
 	SendInput, %champ%
@@ -57,6 +48,15 @@ F1::
 	; Lock champ
 	MouseClick, left, champ_x, champ_y
 	MouseClick, left, lock_x, lock_y
+	
+	; Wait chat to connect
+	Sleep, delay
+	
+	; Declare position
+	MouseClick, left, chat_x, chat_y
+	SendInput, %lane%
+	MouseClick, left, chat_x, chat_y
+	SendInput, {ENTER}
 	return
 }
 
